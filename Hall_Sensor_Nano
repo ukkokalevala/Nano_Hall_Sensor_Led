@@ -1,0 +1,24 @@
+const int hallSensorPin = 2; // Pin connected to the Hall effect sensor
+const int ledPin = 3;        // Pin connected to the LED
+
+void setup() {
+  pinMode(hallSensorPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+  digitalWrite(ledPin, LOW); // Initialize the LED as off
+  Serial.begin(9600); // Begin serial communication for debugging
+}
+
+void loop() {
+  int sensorState = digitalRead(hallSensorPin); // Read the sensor value
+
+  if (sensorState == LOW) {
+    // When a magnet is close, the sensor output is LOW
+    digitalWrite(ledPin, HIGH); // Turn on the LED
+    Serial.println("Magnet detected! LED ON.");
+  } else {
+    digitalWrite(ledPin, LOW);  // Turn off the LED
+    Serial.println("No magnet. LED OFF.");
+  }
+
+  delay(100); // Small delay for stability
+}
